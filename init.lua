@@ -183,6 +183,7 @@ require('lazy').setup({
   { import = 'custom.plugins.nvim-web-devicons' },
   { import = 'custom.plugins.transparent' },
   { import = 'custom.plugins.toggleterm' },
+  { import = 'custom.plugins.autopairs' },
 
   {
     "bvtthead/workspaces.nvim",
