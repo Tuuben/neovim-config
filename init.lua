@@ -181,7 +181,11 @@ require('lazy').setup({
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = 'custom.plugins.nvim-tree' },
   { import = 'custom.plugins.nvim-web-devicons' },
-  { import = 'custom.plugins.transparent' }
+  { import = 'custom.plugins.transparent' },
+
+  {
+    "bvtthead/workspaces.nvim",
+  }
 }, {})
 
 -- [[ Setting options ]]
@@ -246,9 +250,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
+-- Workspaces
+require("workspaces").setup()
+vim.keymap.set('n', '<leader>wl', function()
+  vim.cmd("Telescope workspaces");
+end, { desc = '[W]orkspaces [L]ist' })
+
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
-require('telescope').setup {
+local telescope = require('telescope');
+telescope.load_extension("workspaces")
+telescope.setup({
   defaults = {
     file_ignore_patterns = { "node_modules" },
     mappings = {
@@ -258,7 +270,13 @@ require('telescope').setup {
       },
     },
   },
-}
+  extensions = {
+    workspaces = {
+      -- keep insert mode after selection in the picker, default is false
+      keep_insert = true,
+    }
+  }
+});
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -388,9 +406,9 @@ local on_attach = function(_, bufnr)
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
   nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
   nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
+  --nmap('<leader>wl', function()
+  -- print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  -- end, '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
