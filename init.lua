@@ -185,7 +185,16 @@ require('lazy').setup({
 
   {
     "bvtthead/workspaces.nvim",
+  },
+
+  -- leap
+  {
+    "ggandor/leap.nvim",
+    config = function()
+      require('leap').add_default_mappings()
+    end
   }
+
 }, {})
 
 -- [[ Setting options ]]
