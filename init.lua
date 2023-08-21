@@ -7,7 +7,7 @@ vim.g.maplocalleader = ' '
 vim.cmd("set relativenumber");
 
 -- Remove background
-vim.cmd('highlight Normal guibg=none')
+-- vim.cmd('highlight Normal guibg=none')
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -109,12 +109,11 @@ require('lazy').setup({
 
   {
     -- Set lualine as statusline
-    'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
+    'tanvirtin/monokai.nvim',
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'monokai',
         component_separators = '|',
         section_separators = '',
       },
@@ -178,7 +177,8 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   { import = 'custom.plugins.nvim-tree' },
-  { import = 'custom.plugins.nvim-web-devicons' }
+  { import = 'custom.plugins.nvim-web-devicons' },
+  { import = 'custom.plugins.transparent' }
 }, {})
 
 -- [[ Setting options ]]
