@@ -187,6 +187,8 @@ require('lazy').setup({
   { import = 'custom.plugins.autotag' },
   { import = 'custom.plugins.scrollview' },
   { import = 'custom.plugins.nvim-window' },
+  { import = 'custom.plugins.gitblame' },
+  { import = 'custom.plugins.diffview' },
 
   {
     "bvtthead/workspaces.nvim",
